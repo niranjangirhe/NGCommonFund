@@ -66,19 +66,21 @@
                 placeholder="Amount" type="number" name="" id="amount">
             </h1>
 
-            <p class="flex items-center text-gray-400 mb-2" id="inputfield">
-              <!-- Actual Entries -->
-              <input
-                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                placeholder="New Entry" type="text" name="" id="entry">
-            </p>
-
+            <div id="inputfield">
+              <p class="flex items-center text-gray-400 mb-2">
+                <!-- Actual Entries -->
+                <input
+                  class="entry w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  placeholder="New Entry" type="text" name="">
+              </p>
+            </div>
             <button
               class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded"
               onclick="addinputfield()">Add Items </button>
             <br>
             <button
-              class="flex items-center mt-auto text-white bg-green-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-green-600 rounded" onclick="addbtnpressed()">Add
+              class="flex items-center mt-auto text-white bg-green-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-green-600 rounded"
+              onclick="addbtnpressed()">Add
               Entry
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
