@@ -40,12 +40,15 @@ function addcardcardwrapper()
 //firebase
 function addentry(name,list, price, description) {
 
+  var d = new Date().getTime(); // for now
+
   const db = firebase.firestore();
   db.collection("testcol").add({
     name: name,
     list: list,
     price: price,
-    description: description
+    description: description,
+    date: d.toString()
   })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
