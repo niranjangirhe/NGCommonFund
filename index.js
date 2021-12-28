@@ -1,6 +1,6 @@
 function addcardcardwrapper() {
   var t = document.getElementById('cardwrapper')
-  t.innerHTML += `<div class="p-4 xl:w-1/4 md:w-1/2 w-full">
+  t.innerHTML = `<div class="p-4 xl:w-1/4 md:w-1/2 w-full">
     <div class="h-full p-6 rounded-lg border-2 border-gray-700 flex flex-col relative overflow-hidden">
       <h2 class="text-sm tracking-widest text-gray-400 title-font mb-1 font-medium">START</h2>
       <h1 class="text-5xl text-white pb-4 mb-4 border-b border-gray-800 leading-none">Free</h1>
@@ -32,7 +32,7 @@ function addcardcardwrapper() {
       </button>
       <p class="text-xs text-gray-400 mt-3">Literally you probably haven't heard of them jean shorts.</p>
     </div>
-  </div>`
+  </div>`+ t.innerHTML;
 }
 
 //firebase
