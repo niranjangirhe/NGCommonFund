@@ -9,9 +9,9 @@ window.addEventListener("DOMContentLoaded", function () {
   var year = newdate.getFullYear()
   var hr = newdate.getHours()
   var min = newdate.getMinutes()
-  if (min.length == 1)
+  if (min.toString().length == 1)
     min = "0" + min
-  if (hr.length == 1)
+  if (hr.toString().length == 1)
     hr = "0" + hr
   var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -25,9 +25,9 @@ function addcardcardwrapper(name, list, price, description, date) {
   var year = newdate.getFullYear()
   var hr = newdate.getHours()
   var min = newdate.getMinutes()
-  if (min.length == 1)
+  if (min.toString().length == 1)
     min = "0" + min
-  if (hr.length == 1)
+  if (hr.toString().length == 1)
     hr = "0" + hr
   var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -83,11 +83,9 @@ function readentry() {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
         psuedostack.push([doc.data().name, doc.data().list, doc.data().price, doc.data().description, doc.data().date])
       });
       for (var i = psuedostack.length - 1; i >= 0; i--) {
-        console.log(i)
         addcardcardwrapper(psuedostack[i][0], psuedostack[i][1], psuedostack[i][2], psuedostack[i][3], psuedostack[i][4])
       }
     })
