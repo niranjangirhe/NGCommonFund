@@ -6,28 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <title>Document</title>
+  <link rel="icon" type="image/x-icon" href="assets/bank.png">
+  <title>Comman Fund - World Bank</title>
 </head>
 
 <body>
   <header class="text-gray-400 bg-gray-900 body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
       <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-green-500 rounded-full"
+        <img src="assets/bank.png" fill="none" 
+          class="w-10 h-10 text-white  "
           viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        <span class="ml-3 text-xl">Tailblocks</span>
+          
+        </img>
+        <span class="ml-3 text-xl">Comman Fund</span>
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <a class="mr-5 hover:text-white">First Link</a>
-        <a class="mr-5 hover:text-white">Second Link</a>
-        <a class="mr-5 hover:text-white">Third Link</a>
-        <a class="mr-5 hover:text-white">Fourth Link</a>
+        <a class="mr-5 hover:text-white" href="" >Home</a>
+        <a class="mr-5 hover:text-white" href="#entries" >Entries</a>
+        <a class="mr-5 hover:text-white" href="#stats">Statistics</a>
+        <a class="mr-5 hover:text-white" href="#contactUs">Contact Us</a>
       </nav>
       <button
-        class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Button
+        class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Login
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           class="w-4 h-4 ml-1" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -48,7 +49,7 @@
           <button class="py-1 px-4 text-gray-300 focus:outline-none">Annually</button>
         </div>
       </div>
-      <div class="flex flex-wrap -m-4" id="cardwrapper">
+      <div class="flex flex-wrap -m-4" id="cardwrapper" id="entries">
         <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
           <div class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
             <span class="bg-green-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl" id="date"></span>
@@ -102,7 +103,7 @@
 
 
   <!-- Report -->
-  <section class="text-gray-400 bg-gray-900 body-font">
+  <section class="text-gray-400 bg-gray-900 body-font" id="stats">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-20">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Master Cleanse Reliac Heirloom</h1>
@@ -164,7 +165,7 @@
 
 
   <!-- ADD NEW ENTRY -->
-  <section class="text-gray-400 bg-gray-900 body-font relative">
+  <section class="text-gray-400 bg-gray-900 body-font relative" id="contactUs">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-12">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Contact Us</h1>
