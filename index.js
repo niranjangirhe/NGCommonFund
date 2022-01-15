@@ -79,7 +79,7 @@ function addentry(name, list, price, description) {
 function readentry() {
 
   var psuedostack = []
-  db.collection("testcol").orderBy("date", "desc").limit(12)
+  db.collection("testcol").orderBy("date", "desc")
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
