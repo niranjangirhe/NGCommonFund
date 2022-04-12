@@ -1,20 +1,13 @@
 //sign up
 function signup() {
-    //alert("nkdjsvbfkfdsj")
     email=document.getElementById("email").value
     password=document.getElementById("password").value
-    //alert(email,password)
-    console.log(email,password)
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
-            // ...
+            alert("signed up")
         })
         .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ..
+           alert(error.message)
         });
 }
 
@@ -24,14 +17,12 @@ function login() {
     password=document.getElementById("password").value
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
-            // ...
+            alert("signed in")
         })
         .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ..
+            
+            alert(error.message);
+            
         });
 }
 
@@ -39,24 +30,23 @@ function login() {
 function logout() {
     firebase.auth().signOut()
         .then(() => {
-            // Sign-out successful.
+            alert("signed out")
         })
         .catch((error) => {
-            // An error happened.
+           alert(error.message)
         });
 }
 
-firebase.auth().onAuthStateChanged(function(user) {
-    console.log("user")
-    if (user) {
-        // User is signed in.
-        window.location.href = "login.html";
-        // ...
-    } else {
-        // User is signed out.
-        // ...
-        if(window.location.href=="index.html"){
-            window.location.href = "login.html";
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            if(!window.location.href.toString().includes("index.html"))
+                window.location.href = "index.html"
+        } else {
+           if(window.location.href.toString().includes("index.html")){  
+            window.location.href = "login.html"
+          }
         }
-    }
+    });
 });
