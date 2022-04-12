@@ -85,9 +85,10 @@
     };
 
     // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    firebase.initializeApp(firebaseConfig);
+   
   </script>
 <script src="auth.js"></script>
 </body>
