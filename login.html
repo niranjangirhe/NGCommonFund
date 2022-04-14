@@ -11,53 +11,51 @@
     <!-- component -->
 <!-- This is an example component -->
  <div class="font-sans">
-    <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
-        <div class="relative sm:max-w-sm w-full">
-            <div class="card bg-green-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
-            <div class="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
-            <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
-                <label for="" class="block mt-3 text-sm text-gray-700 text-center font-semibold">
+    <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-900 ">
+        <div class="relative sm:max-w-sm rounded-lg border-2 border-green-500 w-full">
+            <div class="card bg-green-500 shadow-lg w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
+            <div class="card bg-green-500 shadow-lg w-full h-full rounded-3xl absolute  transform rotate-6"></div>
+            <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-900 shadow-md">
+                <label for="" class="block mt-3 text-sm text-gray-100 text-center font-semibold">
                     Login
                 </label>
-                <form method="#" action="#" class="mt-10">
                     <div>
-                        <input id="email" type="email" placeholder="email" class="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                        <input id="email" type="email" placeholder="email" class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
         
                     <div class="mt-7">                
-                        <input id="password" type="password" placeholder="password" class="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">                           
+                        <input id="password" type="password" placeholder="password" class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">                           
                     </div>
 
                     <div class="mt-7 flex">
                         <label for="remember_me" class="inline-flex items-center w-full cursor-pointer">
                             <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                            <span class="ml-2 text-sm text-gray-600">
+                            <span class="ml-2 text-sm text-gray-100">
                                 Remember
                             </span>
                         </label>
         
                        <div class="w-full text-right">     
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="#">
+                            <a class="underline text-sm text-gray-500 hover:text-gray-100" href="#">
                                 Forgot Password
                             </a>                                  
                        </div>
                     </div>
         
                     <div class="mt-7">
-                        <button class="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105" onclick="login()">
+                        <button class="bg-green-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105" onclick="login()">
                             Login
                         </button>
                     </div>
                 
                     <div class="flex mt-7 justify-center w-full">
         
-                        <button class="bg-green-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                        <button class="bg-green-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105" onclick="window.location.href='signup.html'">
                             
                             Sign Up
                         </button>
                     </div>
-        
-                </form>
+
             </div>
         </div>
     </div>
