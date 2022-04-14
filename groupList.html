@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <script src="groupList.js"></script>
  <!-- component -->
 <div
 class="container mb-2 flex mx-auto w-full items-center justify-center"
@@ -19,7 +20,21 @@ class="container mb-2 flex mx-auto w-full items-center justify-center"
   
   
 </ul>
+<button
+              class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg" onclick="enableGroupForm()">Create Group</button>
 </div>
+<div id="groupform" class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded" style="display: none;">
+    <div>
+      <label for="" class="block">Group Name</label>
+      <input id="name" type="text" class="border w-full h-10 px-3 mb-5 rounded-md" placeholder="Name">
+      <label for="" class="block">User email</label>
+      <div id="inputfield">
+      <input type="Email" class="entry border w-full h-10 px-3 mb-5 rounded-md" placeholder="email">
+      </div>
+      <button class="mt-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-14 py-3 rounded" onclick="addinputfield()">Add more user</button>
+    <button class="mt-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-14 py-3 rounded" onclick="addbtnpressed()">Add Group</button>
+    </div>
+  </div>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -48,7 +63,6 @@ class="container mb-2 flex mx-auto w-full items-center justify-center"
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
   </script>
-  <script src="groupList.js"></script>
   <script src="auth.js"></script>
 </body>
 

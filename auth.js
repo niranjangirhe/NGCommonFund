@@ -5,16 +5,16 @@ function signup() {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             alert("signed up")
-            var db = firebase.firestore();
             var list=[];
-            db.collection("user").doc(firebase.auth().currentUser.toString()).set({
-                group: list
-              })
-                .then((docRef) => {
-                  console.log("Document written with ID: ", docRef.id);
+            firebase.firestore().collection("user").doc(firebase.auth().currentUser.email).set({
+                    group: list
+                })
+                .then(() => {
+                    console.log("Document successfully written!");
+                    window.local.href = "groupList.html";
                 })
                 .catch((error) => {
-                  console.error("Error adding document: ", error);
+                    console.error("Error writing document: ", error);
                 });
         })
         .catch((error) => {
