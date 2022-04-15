@@ -8,35 +8,39 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="assets/bank.png">
   <script src="groupList.js"></script>
-  <title>Common Fund - World Bank</title>
+  <title>Split-It</title>
 </head>
 
 <body>
   <!-- component -->
-  <div class="container mb-2 flex mx-auto w-full items-center justify-center">
+  <div class="relative min-h-screen flex flex-col items-center bg-gray-900 ">
+    <label for="" class="block mt-6 text-3xl text-gray-100 text-center font-semibold">
+      Existing Groups
+  </label>
+  <div class="container mt-5 mb-2 flex mx-auto w-full items-center justify-center ">
     <ul class="flex flex-col p-4" id="listholder">
     </ul>
   </div>
   <button
     class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
     onclick="enableGroupForm()">Create Group</button>
-  <div id="groupform" class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded"
+  <div id="groupform" class="border-2 mt-3 border-green-500 relative px-4 pt-7 pb-8 bg-gray-900 shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded"
     style="display: none;">
     <div>
-      <label for="" class="block">Group Name</label>
-      <input id="name" type="text" class="border w-full h-10 px-3 mb-5 rounded-md" placeholder="Name">
-      <label for="" class="block">User email</label>
+
+      <input id="name" type="text" class="mt-5 w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="Group Name">
       <div id="inputfield">
-        <input type="Email" class="entry border w-full h-10 px-3 mb-5 rounded-md" placeholder="email">
+        <input type="Email" class="mt-5 w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="User Email">
       </div>
       <button
-        class="mt-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-14 py-3 rounded"
+        class="mt-5 bg-green-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105"
         onclick="addinputfield()">Add more user</button>
       <button
-        class="mt-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-14 py-3 rounded"
+        class="mt-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-10 py-3 rounded"
         onclick="addbtnpressed()">Add Group</button>
     </div>
   </div>
+</div>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>

@@ -38,10 +38,10 @@ function addcard(name,i) {
     var cardwrapper = document.getElementById("listholder")
     cardwrapper.innerHTML += `<li class="border-gray-400 flex flex-row mb-2">
     <div onclick="openIndex(`+i+`)" 
-      class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-6 hover:shadow-2xl border-red-400"
+      class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-6 hover:shadow-2xl border-green-500"
     >
-      <div class="flex-1 pl-1 mr-16">
-        <div class="font-medium">
+      <div class="flex-1" style="text-align:center;">
+        <div class="font-medium text-gray-200">
          ` + name + `
         </div>
       </div>
@@ -69,7 +69,7 @@ function addinputfield() {
     }
 
     var inputF = document.getElementById('inputfield')
-    inputF.innerHTML += `<input type="Email" class="entry border w-full h-10 px-3 mb-5 rounded-md" placeholder="email">`
+    inputF.innerHTML += `<input type="Email" class="mt-3 w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="User Email">`
 
     for (var i = 0; i < entry.length - 1; i++) {
         entry[i].value = list[i];

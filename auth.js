@@ -2,8 +2,21 @@
 function signup() {
     email=document.getElementById("email").value
     password=document.getElementById("password").value
+    username=document.getElementById("name").value
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
+            const user = firebase.auth().currentUser;
+
+            user.updateProfile({
+              displayName: username
+            }).then(() => {
+              // Update successful
+              // ...
+            }).catch((error) => {
+              // An error occurred
+              // ...
+            });  
+
             alert("signed up")
             var list=[];
             firebase.firestore().collection("user").doc(firebase.auth().currentUser.email).set({
