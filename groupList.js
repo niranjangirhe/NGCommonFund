@@ -19,6 +19,7 @@ async function readentry(myemail) {
 }
 var nameList=[];
 async function addcardcardwrapper(psuedostack) {
+    console.log(psuedostack);
     for (var i = 0; i < psuedostack.length; i++) {
         await db.collection("group").doc(psuedostack[i]).get().then((doc) => {
             if (doc.exists) {

@@ -68,7 +68,7 @@ function addentry(name, list, price, description) {
 
   for(var i=0;i<report.length;i++){
     if(i==index){
-      report[i]+=price/report.length;
+      report[i]+=(price*(report.length-1))/report.length;
     }
     else
     {
@@ -99,13 +99,6 @@ function addentry(name, list, price, description) {
     });
 }
 function readentry() {
-
-
-
-
-  
-
-
 
   console.log(localStorage.getItem("grouplink"))
 
