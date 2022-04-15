@@ -1,8 +1,8 @@
 var db = null;
 var index = -1;
-var users=[];
-var myemail="";
-var report=[];
+var users = [];
+var myemail = "";
+var report = [];
 window.addEventListener("DOMContentLoaded", function () {
   db = firebase.firestore();
   readentry()
@@ -66,17 +66,16 @@ function addcardcardwrapper(name, list, price, description, date) {
 //firebase
 function addentry(name, list, price, description) {
 
-  for(var i=0;i<report.length;i++){
-    if(i==index){
-      report[i]+=(price*(report.length-1))/report.length;
+  for (var i = 0; i < report.length; i++) {
+    if (i == index) {
+      report[i] += (price * (report.length - 1)) / report.length;
     }
-    else
-    {
-      report[i]-=price/report.length;
+    else {
+      report[i] -= price / report.length;
     }
   }
-  
-  
+
+
   // To update age and favorite color:
   db.collection("group").doc(localStorage.getItem("grouplink")).update({
     report: report
@@ -177,29 +176,34 @@ function clearinputfeilds() {
 
 window.addEventListener('DOMContentLoaded', (event) => {
   firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        db.collection("group").doc(localStorage.getItem("grouplink")).get().then((doc) => {
-          if (doc.exists) {
-            console.log(doc.data().name);
-            console.log(doc.id);
-            users=doc.data().list;
-            report=doc.data().report;
-            for (var i = 0; i < users.length; i++) {
-              if(users[i]==user.email){
-                index=i;
-                console.log(index);
-                break;
-              }
+    if (user) {
+      db.collection("group").doc(localStorage.getItem("grouplink")).get().then((doc) => {
+        if (doc.exists) {
+          console.log(doc.data().name);
+          console.log(doc.id);
+          users = doc.data().list;
+          report = doc.data().report;
+          for (var i = 0; i < users.length; i++) {
+            if (users[i] == user.email) {
+              index = i;
+              console.log(index);
             }
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+            console.log(users[i])
+            label.innerHTML += ` <label class="inline-flex items-center mt-3">
+          <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ users[i] + `</span>
+      </label>`
           }
-        }).catch((error) => {
-          console.log("Error getting document:", error);
-        });
-      } else {
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
 
-      }
+
+    } else {
+
+    }
   });
 });
