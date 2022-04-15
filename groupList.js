@@ -96,7 +96,8 @@ async function addentry(name, list) {
 
    await db.collection("group").add({
         name: name,
-        list: list
+        list: list,
+        report: Array(list.length).fill(0)
     })
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
