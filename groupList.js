@@ -1,11 +1,11 @@
-var db = null;
-window.addEventListener("DOMContentLoaded", function () {
-    db = firebase.firestore();
-    readentry()
-});
 
-function readentry() {
-    db.collection("user").document(firebase.auth.currentUser.uid).get().then((doc) => {
+var db = null;
+var myemail = "";
+window.addEventListener("DOMContentLoaded", async function () {
+    db = firebase.firestore();
+});
+async function readentry(myemail) {
+    db.collection("user").doc(myemail).get().then((doc) => {
         if (doc.exists) {
             addcardcardwrapper(doc.data().group);
             console.log("Document data:", doc.data());
@@ -17,36 +17,46 @@ function readentry() {
         console.log("Error getting document:", error);
     });
 }
-
-function addcardcardwrapper(psuedostack) {
+var nameList=[];
+async function addcardcardwrapper(psuedostack) {
     for (var i = 0; i < psuedostack.length; i++) {
-        addcard(psuedostack[i])
+        await db.collection("group").doc(psuedostack[i]).get().then((doc) => {
+            if (doc.exists) {
+                addcard(doc.data().name,i)
+                nameList.push(psuedostack[i]);
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+
     }
 }
 
-function addcard(name) {
+function addcard(name,i) {
     var cardwrapper = document.getElementById("listholder")
     cardwrapper.innerHTML += `<li class="border-gray-400 flex flex-row mb-2">
-    <div
+    <div onclick="openIndex(`+i+`)" 
       class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-6 hover:shadow-2xl border-red-400"
     >
       <div class="flex-1 pl-1 mr-16">
         <div class="font-medium">
-          Product-Based Service Based or Hybrid?
+         ` + name + `
         </div>
-      </div>
-      <div
-        class="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-red-500 justify-center items-center mr-10 p-2"
-      >
-        B2C
       </div>
     </div>
   </li>`
 
 }
+function openIndex(i)
+{
+    console.log(nameList[i]);
+    localStorage.setItem("grouplink", nameList[i]);
+    window.location.href = "index.html";
+}
 
 function enableGroupForm() {
-    alert = ("dnkjsdl");
     dc = document.getElementById("groupform");
     dc.style.display = "block";
 }
@@ -82,18 +92,18 @@ function addbtnpressed() {
     }
 }
 
-function addentry(name, list) {
+async function addentry(name, list) {
 
-    db.collection("group").add({
+   await db.collection("group").add({
         name: name,
         list: list
     })
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
-            var groupid= docRef.id;
+            var groupid = docRef.id;
             for (var i = 0; i < list.length; i++) {
 
-                db.collection("user").doc(list[i])
+                 db.collection("user").doc(list[i])
                     .get().then((doc) => {
                         if (doc.exists) {
                             var group = doc.data().group;
@@ -104,7 +114,7 @@ function addentry(name, list) {
                             })
                                 .then(() => {
                                     console.log("Document successfully updated!");
-
+                                    window.location.reload();
                                 })
                                 .catch((error) => {
                                     console.error("Error updating document: ", error);
@@ -122,3 +132,13 @@ function addentry(name, list) {
             console.error("Error adding document: ", error);
         });
 }
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            readentry(user.email);
+        } else {
+
+        }
+    });
+});

@@ -2,7 +2,7 @@ var db = null;
 window.addEventListener("DOMContentLoaded", function () {
   db = firebase.firestore();
   readentry()
-  var date=document.getElementById("date")
+  var date = document.getElementById("date")
   var newdate = new Date()
   var datenum = newdate.getDate()
   var month = newdate.getMonth()
@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
   var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   datesrtring = datenum + " " + months[month] + " " + year + " " + hr + ":" + min;
-  date.innerHTML=datesrtring
+  date.innerHTML = datesrtring
 }, false);
 function addcardcardwrapper(name, list, price, description, date) {
   var newdate = new Date(date * 1000)
@@ -62,7 +62,7 @@ function addcardcardwrapper(name, list, price, description, date) {
 //firebase
 function addentry(name, list, price, description) {
 
-  db.collection("testcol").add({
+  db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").add({
     name: name,
     list: list,
     price: price,
@@ -79,7 +79,7 @@ function addentry(name, list, price, description) {
 function readentry() {
 
   var psuedostack = []
-  db.collection("testcol").orderBy("date", "desc")
+  db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").orderBy("date", "desc")
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -122,7 +122,7 @@ function addbtnpressed() {
   var amount = document.getElementById("amount").value
   var discription = document.getElementById("discription").value
   var entry = document.getElementsByClassName("entry");
-  if (name == "" || amount == "" || entry[0].value.trim() == "")
+  if (amount == "" || entry[0].value.trim() == "")
     alert("Please Enter complete Info")
   else {
     var list = [];
@@ -131,7 +131,7 @@ function addbtnpressed() {
         list.push(entry[i].value.trim());
     }
     console.log(list)
-    addentry(name, list, amount, discription)
+    addentry(firebase.auth().currentUser.email, list, amount, discription)
     clearinputfeilds()
     readentryonces(name, list, amount, discription)
   }
