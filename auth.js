@@ -1,52 +1,61 @@
 //sign up
 function signup() {
-    email=document.getElementById("email").value
-    password=document.getElementById("password").value
-    username=document.getElementById("name").value
+    email = document.getElementById("email").value
+    password = document.getElementById("password").value
+    username = document.getElementById("name").value
+    loading = document.getElementById("loading")
+    loading.style.display = "block"
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = firebase.auth().currentUser;
 
             user.updateProfile({
-              displayName: username
+                displayName: username
             }).then(() => {
-              // Update successful
-              // ...
-            }).catch((error) => {
-              // An error occurred
-              // ...
-            });  
 
-            alert("signed up")
-            var list=[];
-            firebase.firestore().collection("user").doc(firebase.auth().currentUser.email).set({
-                    group: list
+                var list = [];
+                firebase.firestore().collection("user").doc(firebase.auth().currentUser.email).set({
+                    group: list,
+                    name: username
                 })
-                .then(() => {
-                    console.log("Document successfully written!");
-                    window.local.href = "groupList.html";
-                })
-                .catch((error) => {
-                    console.error("Error writing document: ", error);
-                });
+                    .then(() => {
+                        console.log("Document successfully written!");
+                        alert("Signed up")
+                        window.location.href = "groupList.html";
+                    })
+                    .catch((error) => {
+                        loading.style.display = "none"
+                        console.error("Error writing document: ", error);
+                    });
+            }).catch((error) => {
+                loading.style.display = "none"
+                // An error occurred
+                // ...
+            });
+
+
         })
         .catch((error) => {
-           alert(error.message)
+            loading.style.display = "none"
+            alert(error.message)
         });
 }
 
 //login
 function login() {
-    email=document.getElementById("email").value
-    password=document.getElementById("password").value
+    email = document.getElementById("email").value
+    password = document.getElementById("password").value
+    loading = document.getElementById("loading")
+    loading.style.display = "block"
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            alert("signed in")
+            alert("Logged in")
+            window.location.href = "groupList.html";
         })
         .catch((error) => {
-            
+
             alert(error.message);
-            
+            loading.style.display = "none"
         });
 }
 
@@ -54,10 +63,11 @@ function login() {
 function logout() {
     firebase.auth().signOut()
         .then(() => {
-            alert("signed out")
+            alert("Signed out")
+            window.location.href = "login.html";
         })
         .catch((error) => {
-           alert(error.message)
+            alert(error.message)
         });
 }
 
@@ -68,7 +78,7 @@ function logout() {
 //             if(!window.location.href.toString().includes("index.html"))
 //                 window.location.href = "index.html"
 //         } else {
-//            if(window.location.href.toString().includes("index.html")){  
+//            if(window.location.href.toString().includes("index.html")){
 //             window.location.href = "login.html"
 //           }
 //         }

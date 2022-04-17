@@ -23,7 +23,6 @@
         <a class="mr-5 hover:text-white" href="">Home</a>
         <a class="mr-5 hover:text-white" href="#entries">Entries</a>
         <a class="mr-5 hover:text-white" href="#stats">Statistics</a>
-        <a class="mr-5 hover:text-white" href="#contactUs">Contact Us</a>
       </nav>
       <button
         class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
@@ -168,9 +167,8 @@
     </div>
   </section>
 
-
-  <!-- ADD NEW ENTRY -->
-  <section class="text-gray-400 bg-gray-900 body-font relative" id="contactUs">
+   <!-- ADD NEW ENTRY -->
+   <section class="text-gray-400 bg-gray-900 body-font relative" id="contactUs">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-12">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Contact Us</h1>
@@ -292,8 +290,8 @@
   <div
     class="main-modal fixed w-full h-100 inset-0 z-50 overflow-y-scroll flex justify-center items-center animated fadeIn faster"
     style="background: rgb(16,185,129,0.4);">
-    <div
-      class="border border-green-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-5 overflow-y-auto">
+    <div style="margin-top: 6%;"
+      class="border border-green-500 shadow-lg modal-container overflow-y-auto bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-5">
       <div class="modal-content py-4 text-left px-6 bg-gray-900">
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
@@ -386,7 +384,7 @@
     const openModal = () => {
       modal.classList.remove('fadeOut');
       modal.classList.add('fadeIn');
-      modal.style.display = 'flex';
+      modal.style.display = 'block';
     }
 
     for (let i = 0; i < closeButton.length; i++) {

@@ -2,6 +2,7 @@
 var db = null;
 var index = -1;
 var users = [];
+var username = [];
 var myemail = "";
 var report = [];
 var psuedostack = [];
@@ -80,7 +81,13 @@ function addentry(name, list, price, description) {
     }
   }
 
+  var userlist=[];
+  var userdoc = document.getElementsByClassName("fc");
+  for (var i = 0; i < userdoc.length; i++) {
+    userlist.push(userdoc[i].checked)
+  }
 
+  console.log(userlist);
 
   db.collection("group").doc(localStorage.getItem("grouplink")).update({
     report: report
@@ -93,6 +100,7 @@ function addentry(name, list, price, description) {
     list: list,
     price: price,
     description: description,
+    userlist: userlist,
     date: Math.floor(Date.now() / 1000)
   })
     .then((docRef) => {
@@ -211,16 +219,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
           report = doc.data().report;
       
           var label = document.getElementById("label");
+          var labelmodal =  document.getElementById("labelmodal");
           for (var i = 0; i < users.length; i++) {
-      
             if (users[i] == user.email) {
               index = i;
             }
-            label.innerHTML += `<label class="inline-flex items-center mt-3">
-            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ users[i] + `</span>
-        </label>`
+            
           }
-          document.getElementById("labelmodal").innerHTML=label.innerHTML;
+          checklistfiller();
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -248,4 +254,33 @@ function EditEntry(index,id) {
   discriptionmodal.value = psuedostack[index][3];
   entrymodal.value  = psuedostack[index][1][0];
   openModal()
+}
+
+async function checklistfiller(){
+  console.log(users)
+  for(var i = 0; i < users.length; i++){
+
+    await db.collection("user").doc(users[i]).get().then((doc) => {
+      if (doc.exists) {
+        username.push(doc.data().name);
+        label.innerHTML += `<label class="inline-flex items-center mt-3">
+            <input type="checkbox" class="form-checkbox fc h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ doc.data().name + `</span>
+        </label>`
+
+        labelmodal.innerHTML= `<label class="inline-flex items-center mt-3">
+        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ doc.data().name + `</span>
+    </label>`;
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+
+
+
+
+  
+  }
 }
