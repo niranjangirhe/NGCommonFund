@@ -5,6 +5,12 @@ function signup() {
     username = document.getElementById("name").value
     loading = document.getElementById("loading")
     loading.style.display = "block"
+    password2= document.getElementById("password2").value
+    if (password != password2) {
+        alert("Passwords do not match")
+        location.reload()
+        return;
+    }
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = firebase.auth().currentUser;
@@ -21,7 +27,7 @@ function signup() {
                     .then(() => {
                         console.log("Document successfully written!");
                         alert("Signed up")
-                        window.location.href = "groupList.html";
+                        window.location.href = "login.html";
                     })
                     .catch((error) => {
                         loading.style.display = "none"
