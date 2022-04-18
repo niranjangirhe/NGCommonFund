@@ -39,10 +39,10 @@ function addcard(name, i) {
     var cardwrapper = document.getElementById("listholder")
     cardwrapper.innerHTML += `<li class="border-gray-400 flex flex-row mb-2">
     <div onclick="openIndex(`+ i + `)" 
-      class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-6 hover:shadow-2xl border-green-500"
+      class="select-none flex flex-1 items-center p-4 transition duration-300 ease-in-out transform hover:-translate-y-2 rounded-full border-2 hover:shadow-2xl border-green-500"
     >
       <div class="flex-1" style="text-align:center;">
-        <div class="font-medium text-gray-200">
+        <div class="font-medium text-gray-100">
          ` + name + `
         </div>
       </div>
