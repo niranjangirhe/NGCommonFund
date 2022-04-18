@@ -9,7 +9,7 @@ var psuedostack = [];
 
 window.addEventListener("DOMContentLoaded", function () {
   db = firebase.firestore();
-  readentry()
+
   var date = document.getElementById("date")
   var newdate = new Date()
   var datenum = newdate.getDate()
@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", function () {
 }, false);
 
 
-function addcardcardwrapper(name, list, price, description, date,docid, index) {
+function addcardcardwrapper(name, list, price, description, date, docid, index, tranUserList) {
   var newdate = new Date(date * 1000)
   var datenum = newdate.getDate()
   var month = newdate.getMonth()
@@ -44,13 +44,33 @@ function addcardcardwrapper(name, list, price, description, date,docid, index) {
   var t = document.getElementById('cardwrapper')
   var liststring = "";
   for (var i = 0; i < list.length; i++) {
-    liststring += `<p class="flex items-center text-gray-400 mb-2">
+    if (i != list.length - 1)
+      liststring += `<p class="flex items-center text-gray-400 mb-2">
     <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-800 text-gray-500 rounded-full flex-shrink-0">
       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
         <path d="M20 6L9 17l-5-5"></path>
       </svg>
     </span>`+ list[i] +
-      `</p>`
+        `</p>`
+    else
+      liststring += `<p class="flex items-center text-gray-400 mb-2 pb-4 border-b border-gray-800">
+    <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-800 text-gray-500 rounded-full flex-shrink-0">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    </span>`+ list[i] +
+        `</p>`
+  }
+  liststring += `<h2 class="text-sm tracking-widest text-gray-400 title-font mb-1 font-medium">Users involved</h2>`
+  for (var i = 0; i < tranUserList.length; i++) {
+    if (tranUserList[i])
+      liststring += `<p class="flex items-center text-gray-400 mb-2">
+    <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-800 text-gray-500 rounded-full flex-shrink-0">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    </span>`+ username[i] +
+        `</p>`
   }
   datesrtring = datenum + " " + months[month] + " " + year + " " + hr + ":" + min;
   t.innerHTML = `<div class="p-4 xl:w-1/4 md:w-1/2 w-full">
@@ -59,7 +79,7 @@ function addcardcardwrapper(name, list, price, description, date,docid, index) {
       <h2 class="text-sm tracking-widest text-gray-400 title-font mb-1 font-medium">`+ name + `</h2>
       <h1 class="text-5xl text-white pb-4 mb-4 border-b border-gray-800 leading-none">`+ "₹ " + price + `</h1>` +
     liststring
-    + `<button class="flex items-center mt-auto text-white bg-green-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-green-600 rounded" onclick="EditEntry('` + index +`','`+ docid + `')">Edit
+    + `<button class="flex items-center mt-auto text-white bg-green-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-green-600 rounded" onclick="EditEntry('` + index + `','` + docid + `')">Edit
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
@@ -81,7 +101,7 @@ function addentry(name, list, price, description) {
     }
   }
 
-  var userlist=[];
+  var userlist = [];
   var userdoc = document.getElementsByClassName("fc");
   for (var i = 0; i < userdoc.length; i++) {
     userlist.push(userdoc[i].checked)
@@ -105,8 +125,8 @@ function addentry(name, list, price, description) {
   })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
-      addcardcardwrapper(name, list, price, description, Math.floor(Date.now() / 1000), docRef.id, psuedostack.length)
-      psuedostack.push([name, list, price, description, Math.floor(Date.now() / 1000), docRef.id, psuedostack.length]);
+      addcardcardwrapper(name, list, price, description, Math.floor(Date.now() / 1000), docRef.id, psuedostack.length, userlist)
+      psuedostack.push([name, list, price, description, Math.floor(Date.now() / 1000), docRef.id, psuedostack.length, userlist]);
       console.log(psuedostack);
     })
     .catch((error) => {
@@ -118,11 +138,11 @@ function readentry() {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        psuedostack.push([doc.data().name, doc.data().list, doc.data().price, doc.data().description, doc.data().date, doc.id,psuedostack.length])
+        psuedostack.push([doc.data().name, doc.data().list, doc.data().price, doc.data().description, doc.data().date, doc.id, psuedostack.length, doc.data().userlist])
       });
       console.log(psuedostack);
       for (var i = psuedostack.length - 1; i >= 0; i--) {
-        addcardcardwrapper(psuedostack[i][0], psuedostack[i][1], psuedostack[i][2], psuedostack[i][3], psuedostack[i][4], psuedostack[i][5], psuedostack[i][6])
+        addcardcardwrapper(psuedostack[i][0], psuedostack[i][1], psuedostack[i][2], psuedostack[i][3], psuedostack[i][4], psuedostack[i][5], psuedostack[i][6], psuedostack[i][7])
       }
     })
     .catch((error) => {
@@ -207,24 +227,24 @@ function clearinputfeilds() {
 
 window.addEventListener('DOMContentLoaded', (event) => {
   //var label = document.getElementById("label");
-  
+
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       db.collection("group").doc(localStorage.getItem("grouplink")).get().then((doc) => {
         if (doc.exists) {
-          
+
           console.log(doc.data().name);
           console.log(doc.id);
           users = doc.data().list;
           report = doc.data().report;
-      
+
           var label = document.getElementById("label");
-          var labelmodal =  document.getElementById("labelmodal");
+          var labelmodal = document.getElementById("labelmodal");
           for (var i = 0; i < users.length; i++) {
             if (users[i] == user.email) {
               index = i;
             }
-            
+
           }
           checklistfiller();
         } else {
@@ -242,23 +262,40 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 
-function EditEntry(index,id) {
+function EditEntry(index, id) {
   console.log(index)
   console.log(id)
   var amountmodal = document.getElementById("amountmodal");
   var discriptionmodal = document.getElementById("discriptionmodal");
   var entrymodal = document.getElementById("entrymodal");
-  var labelmodal = document.getElementById("labelmodal");
+  var mod = document.getElementsByClassName("mod");
   var inputfieldmodal = document.getElementById("inputfieldmodal");
   amountmodal.value = psuedostack[index][2];
   discriptionmodal.value = psuedostack[index][3];
-  entrymodal.value  = psuedostack[index][1][0];
+  var inputF = document.getElementById('inputfieldmodal')
+  inputF.innerHTML="";  
+  for(var i=0;i<psuedostack[index][1].length;i++){
+    inputF.innerHTML += `<p class="flex items-center text-gray-400 mb-2" >
+  <input
+    class="entrymodal w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    placeholder="New Entry" type="text" name="" id="entrymodal" value="`+psuedostack[index][1][i]+`">
+</p>`
+  }
+  for(var i=0;i<mod.length;i++){
+    if(psuedostack[index][7][i])
+    {
+      mod[i].checked=true;
+    }
+    else{
+      mod[i].checked=false;
+    }
+  }
   openModal()
 }
 
-async function checklistfiller(){
+async function checklistfiller() {
   console.log(users)
-  for(var i = 0; i < users.length; i++){
+  for (var i = 0; i < users.length; i++) {
 
     await db.collection("user").doc(users[i]).get().then((doc) => {
       if (doc.exists) {
@@ -267,8 +304,8 @@ async function checklistfiller(){
             <input type="checkbox" class="form-checkbox fc h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ doc.data().name + `</span>
         </label>`
 
-        labelmodal.innerHTML= `<label class="inline-flex items-center mt-3">
-        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ doc.data().name + `</span>
+        labelmodal.innerHTML += `<label class="inline-flex items-center mt-3">
+        <input type="checkbox" class="form-checkbox mod h-5 w-5 text-gray-400" checked><span class="ml-2 text-gray-400">`+ doc.data().name + `</span>
     </label>`;
       } else {
         // doc.data() will be undefined in this case
@@ -277,10 +314,6 @@ async function checklistfiller(){
     }).catch((error) => {
       console.log("Error getting document:", error);
     });
-
-
-
-
-  
   }
+  readentry()
 }
