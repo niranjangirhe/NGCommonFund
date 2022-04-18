@@ -5,10 +5,10 @@ function signup() {
     username = document.getElementById("name").value
     loading = document.getElementById("loading")
     loading.style.display = "block"
-    password2= document.getElementById("password2").value
+    password2 = document.getElementById("password2").value
     if (password != password2) {
         alert("Passwords do not match")
-        location.reload()
+        loading.style.display = "none"
         return;
     }
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -78,15 +78,13 @@ function logout() {
 }
 
 
-// window.addEventListener('DOMContentLoaded', (event) => {
-//     firebase.auth().onAuthStateChanged((user) => {
-//         if (user) {
-//             if(!window.location.href.toString().includes("index.html"))
-//                 window.location.href = "index.html"
-//         } else {
-//            if(window.location.href.toString().includes("index.html")){
-//             window.location.href = "login.html"
-//           }
-//         }
-//     });
-// });
+window.addEventListener('DOMContentLoaded', (event) => {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+
+        } else {
+            if (!window.location.href.includes("login.html"))
+                window.location.href = "login.html"
+        }
+    });
+});

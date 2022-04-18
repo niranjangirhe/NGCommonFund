@@ -8,13 +8,16 @@ async function readentry(myemail) {
     db.collection("user").doc(myemail).get().then((doc) => {
         if (doc.exists) {
             addcardcardwrapper(doc.data().group);
+           
             console.log("Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
+            hideLoader()
         }
     }).catch((error) => {
         console.log("Error getting document:", error);
+        hideLoader()
     });
 }
 var nameList = [];
@@ -33,6 +36,7 @@ async function addcardcardwrapper(psuedostack) {
         });
 
     }
+    hideLoader()
 }
 
 function addcard(name, i) {
@@ -87,7 +91,7 @@ function addbtnpressed() {
         for (var i = 0; i < entry.length; i++) {
             if (entry[i].value.trim() != "")
                 list.push(entry[i].value.trim());
-            if(entry[i].value.trim() === firebase.auth().currentUser.email){
+            if (entry[i].value.trim() === firebase.auth().currentUser.email) {
                 alert("You can't add yourself to your own group")
                 inputF.innerHTML = `<input type="Email" class="mt-3 entry w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="User Email">`
                 return;

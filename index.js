@@ -10,6 +10,12 @@ var editDocid;
 var oldPrice;
 var oldUser = [];
 var oldindex;
+var totalentries = 0;
+var totalprice = 0;
+var myspending = 0;
+var templist = [];
+
+
 window.addEventListener("DOMContentLoaded", function () {
   db = firebase.firestore();
 
@@ -90,7 +96,7 @@ function addcardcardwrapper(name, list, price, description, date, docid, index, 
       <h1 class="text-5xl text-white pb-4 mb-4 border-b border-gray-800 leading-none">`+ "₹ " + price + `</h1>` +
     liststring
     + buttoncode + `
-      <p class="text-xs text-gray-400 mt-3">`+ description + `</p>
+      <p class="text-xl text-gray-400 mt-3 border-t pt-3 border-gray-800">`+ description + `</p>
     </div>
   </div>`+ t.innerHTML;
 }
@@ -133,6 +139,9 @@ function addentry(name, list, price, description) {
     report: report
   })
     .then(() => {
+      totalentries++;
+      totalprice += parseFloat(price);
+      myspending += parseFloat(price);
       console.log("Document successfully updated!");
     });
   db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").add({
@@ -146,8 +155,12 @@ function addentry(name, list, price, description) {
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
       addcardcardwrapper(name, list, price, description, Math.floor(Date.now() / 1000), docRef.id, psuedostack.length, userlist)
+      hideLoader();
+      window.scroll(0, 0);
       psuedostack.push([name, list, price, description, Math.floor(Date.now() / 1000), docRef.id, psuedostack.length, userlist]);
       console.log(psuedostack);
+
+      updateStats()
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -158,16 +171,106 @@ function readentry() {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        totalentries++;
+        totalprice += parseFloat(doc.data().price);
+        if (doc.data().name == firebase.auth().currentUser.displayName)
+          myspending += parseFloat(doc.data().price);
         psuedostack.push([doc.data().name, doc.data().list, doc.data().price, doc.data().description, doc.data().date, doc.id, psuedostack.length, doc.data().userlist])
       });
       console.log(psuedostack);
       for (var i = psuedostack.length - 1; i >= 0; i--) {
         addcardcardwrapper(psuedostack[i][0], psuedostack[i][1], psuedostack[i][2], psuedostack[i][3], psuedostack[i][4], psuedostack[i][5], psuedostack[i][6], psuedostack[i][7])
       }
+      hideLoader();
+      console.log(totalentries, totalprice, myspending, report[index]);
+      updateStats();
+      window.scroll(0, 0);
     })
     .catch((error) => {
       console.log("Error getting documents: ", error);
     });
+}
+
+function updateStats() {
+  console.log(totalentries, totalprice, myspending, report[index]);
+  document.getElementById("totalentries").innerHTML = totalentries;
+  document.getElementById("totalprice").innerHTML = "₹ " + totalprice.toFixed(2);
+  document.getElementById("myspending").innerHTML = "₹ " + myspending.toFixed(2);
+  document.getElementById("totalbalance").innerHTML = "₹ " + report[index].toFixed(2);
+  updateReport()
+}
+
+
+function updateReport() {
+  var rep = document.getElementById("report");
+  var rep2 = document.getElementById("report2");
+  rep.innerHTML ="";
+  rep2.innerHTML ="";
+  for (var i = 0; i < report.length; i++) {
+    var color = "text-green-400";
+    if (report[i] < 0) {
+      color = "text-red-400";
+    }
+    rep.innerHTML += `<p class="flex items-center text-2xl mb-2">
+    <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-800 text-gray-500 rounded-full flex-shrink-0">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    </span>` + username[i] + `: ₹ <span class=" ` + color + ` "> ` + report[i].toFixed(2) +
+      `</span></p>`;
+  }
+
+  for (var i = 0; i < report.length; i++) {
+    templist.push([report[i], i]);
+  }
+  updatereportmax()
+}
+
+function sortFunction(a, b) {
+  if (a[0] === b[0]) {
+      return 0;
+  }
+  else {
+      return (a[0] < b[0]) ? -1 : 1;
+  }
+}
+
+
+function updatereportmax() {
+  //console.log("===============================")
+  for (var i = 0; i < templist.length; i++) {
+   console.log(templist[i][0], templist[i][1]);
+  }
+  //console.log("-------------------------------")
+  templist.sort(sortFunction);
+  for (var i = 0; i < templist.length; i++) {
+    console.log(templist[i][0], templist[i][1]);
+   }
+  var rep = document.getElementById("report2");
+  var amount = 0;
+  if (-templist[0][0] > templist[templist.length - 1][0]) {
+    amount = templist[templist.length - 1][0];
+    templist[templist.length - 1][0] = 0;
+    templist[0][0] += amount;
+  }
+  else {
+    amount = -templist[0][0];
+    templist[0][0] = 0;
+    templist[templist.length - 1][0] -= amount;
+  }
+  if (amount < 1)
+    return
+  rep.innerHTML += `<p class="flex items-center text-2xl mb-2">
+    <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-800 text-gray-500 rounded-full flex-shrink-0">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    </span>` + username[templist[0][1]] + ` should pay ` + amount.toFixed(2) + ` money to ` + username[templist[templist.length - 1][1]] +
+    `</span></p>`;
+  updatereportmax();
+}
+function scrolltoform() {
+  window.scroll(0, document.getElementById("fillform").offsetTop - 30);
 }
 
 
@@ -214,11 +317,14 @@ function addinputfieldmodal() {
 
 
 function addbtnpressed() {
+  playLoader();
   var amount = document.getElementById("amount").value
   var discription = document.getElementById("discription").value
   var entry = document.getElementsByClassName("entry");
-  if (amount == "" || entry[0].value.trim() == "")
+  if (amount == "" || entry[0].value.trim() == "") {
     alert("Please Enter complete Info")
+    hideLoader();
+  }
   else {
     var list = [];
     for (var i = 0; i < entry.length; i++) {
@@ -336,6 +442,7 @@ async function checklistfiller() {
       console.log("Error getting document:", error);
     });
   }
+  document.getElementById("greet").innerHTML = `Welcome ` + firebase.auth().currentUser.displayName + `!`;
   readentry()
 }
 function editEntryDB() {
@@ -387,8 +494,8 @@ function updateentry(name, list, price, description) {
     for (var i = 0; i < report.length; i++) {
 
       if (i == index) {
-        if ( psuedostack[oldindex][7][i]) {
-          report[i] -= (psuedostack[oldindex][2]* (oldcountuser - 1)) / oldcountuser;
+        if (psuedostack[oldindex][7][i]) {
+          report[i] -= (psuedostack[oldindex][2] * (oldcountuser - 1)) / oldcountuser;
         }
         else {
           report[i] -= (psuedostack[oldindex][2] * (oldcountuser)) / oldcountuser;
@@ -416,7 +523,7 @@ function updateentry(name, list, price, description) {
           report[i] -= price / countuser;
         }
       }
-  
+
     }
   }
 
@@ -429,17 +536,70 @@ function updateentry(name, list, price, description) {
       console.log("Document successfully updated!");
     });
 
-    db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").doc(editDocid).update({
-      name: name,
-      list: list,
-      price: price,
-      description: description,
-      userlist: userlist,
-      date: psuedostack[oldindex][4]
+  db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").doc(editDocid).update({
+    name: name,
+    list: list,
+    price: price,
+    description: description,
+    userlist: userlist,
+    date: psuedostack[oldindex][4]
   })
-  .then(() => {
+    .then(() => {
       console.log("Document successfully updated!");
       window.location.reload();
+    });
+
+}
+
+
+
+
+//delete entry
+function deleteentry() {
+  playLoader();
+  console.log(report);
+  var oldcountuser = 0;
+  for (var i = 0; i < psuedostack[oldindex][7].length; i++) {
+    if (psuedostack[oldindex][7][i])
+      oldcountuser++;
+  }
+
+
+
+  for (var i = 0; i < report.length; i++) {
+
+    if (i == index) {
+      if (psuedostack[oldindex][7][i]) {
+        report[i] -= (psuedostack[oldindex][2] * (oldcountuser - 1)) / oldcountuser;
+      }
+      else {
+        report[i] -= (psuedostack[oldindex][2] * (oldcountuser)) / oldcountuser;
+      }
+    }
+    else {
+      if (psuedostack[oldindex][7][i]) {
+        report[i] += psuedostack[oldindex][2] / oldcountuser;
+      }
+    }
+  }
+
+
+  console.log(report);
+
+  db.collection("group").doc(localStorage.getItem("grouplink")).update({
+    report: report
+  })
+    .then(() => {
+      console.log("Document successfully updated!");
+    });
+
+
+  db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").doc(editDocid).delete().then(() => {
+    console.log("Document successfully deleted!");
+    window.location.reload();
+  }).catch((error) => {
+    console.error("Error removing document: ", error);
+    hideLoader();
   });
-  
+
 }

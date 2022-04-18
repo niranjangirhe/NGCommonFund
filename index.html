@@ -11,6 +11,68 @@
 </head>
 
 <body>
+  <button onclick="scrolltoform()" style="z-index: 100; position: fixed; right:30px; bottom: 30px;"
+    class="p-0 w-14 h-14 bg-green-500 rounded-full hover:bg-green-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+    <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
+      <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+                                    C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
+                                    C15.952,9,16,9.447,16,10z" />
+    </svg>
+  </button>
+  <style>
+    #loader {
+      position: fixed;
+      z-index: 1000;
+      width: 100%;
+      height: 100vh;
+      background: #111827 url("/loader.gif") no-repeat center;
+      background-size: 30%;
+    }
+
+    fadeinout-animate {
+      width: 200px;
+      height: 200px;
+      background: red;
+      opacity: 0;
+    }
+
+    @keyframes fadeinout {
+      0% {
+        opacity: 1;
+        z-Index: 50;
+      }
+
+      100% {
+        opacity: 0;
+        z-Index: -1;
+      }
+    }
+
+    @keyframes fadeoutin {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <div
+    class="fixed w-full h-100 inset-0 z-50 overflow-y-scroll flex justify-center items-center animated fadeIn faster fadeinout-animate"
+    style="background: rgb(16,185,129);" id="loader">
+    <div class="flex justify-center items-center space-x-1 text-sm text-gray-700">
+
+      <svg fill='none' class="w-10 h-10 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
+        <path clip-rule='evenodd'
+          d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
+          fill='currentColor' fill-rule='evenodd' />
+      </svg>
+
+
+      <span class="ml-3 text-2xl">Split-It....</span>
+    </div>
+  </div>
   <header class="text-gray-400 bg-gray-900 body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
       <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
@@ -22,7 +84,6 @@
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         <a class="mr-5 hover:text-white" href="">Home</a>
         <a class="mr-5 hover:text-white" href="groupList.html">Groups</a>
-        <a class="mr-5 hover:text-white" href="#contactUs">Contact Us</a>
         <a class="mr-5 hover:text-white" href="#stats">Statistics</a>
       </nav>
       <button
@@ -40,12 +101,13 @@
   <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">Pricing</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Split-It When You Need It!</p>
+        <h2 class="sm:text-2xl text-3xl font-medium title-font mb-2 text-while" id="greet"></h2>
+        <h2 class="sm:text-2xl text-3xl font-medium title-font mb-2 text-gray-400">Split-It When You Need It!</h2>
       </div>
       <div class="flex flex-wrap -m-4" id="cardwrapper" id="entries">
         <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-          <div class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
+          <div id="fillform"
+            class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
             <span class="bg-green-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"
               id="date"></span>
 
@@ -103,8 +165,47 @@
 
 
   <!-- Report -->
-  <section class="text-gray-400 bg-gray-900 body-font" id="stats">
+  <span class="flex items-center border-b border-gray-800"></span>
+
+  <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
     <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h2 class="sm:text-2xl text-3xl font-medium title-font mb-2 text-white">Report</h2>
+      </div>
+      <div class="flex flex-wrap -m-4" id="cardwrapper" id="entries">
+        <div class="p-4 xl:w-1/2 md:w-1/2 w-full">
+          <div id="fillform"
+            class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
+
+
+
+
+
+            <!-- component -->
+
+            <div id="report">
+
+            </div>
+
+          </div>
+        </div>
+        <div class="p-4 xl:w-1/2 md:w-1/2 w-full">
+          <div id="fillform"
+            class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
+
+            <div id="report2">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <span class="flex items-center border-b border-gray-800"></span>
+  <section class="text-gray-400 bg-gray-900 body-font" id="stats">
+    <div class="container px-5 py-10 mx-auto">
       <div class="flex flex-col text-center w-full mb-20">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Statistics</h1>
       </div>
@@ -114,7 +215,7 @@
             <img src="assets/salary.png" class="text-green-400 w-12 h-12 mb-3 inline-block">
 
             </img>
-            <h2 class="title-font font-medium text-3xl text-white">₹ 5k</h2>
+            <h2 class="title-font font-medium text-2xl text-white" id="totalbalance">₹ </h2>
             <div>
 
             </div>
@@ -129,8 +230,8 @@
               <circle cx="9" cy="7" r="4"></circle>
               <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
             </svg>
-            <h2 class="title-font font-medium text-3xl text-white"> ₹ 1.3K</h2>
-            <p class="leading-relaxed">Total usage</p>
+            <h2 class="title-font font-medium text-2xl text-white" id="totalprice"> ₹ 1.3K</h2>
+            <p class="leading-relaxed">Total Spending</p>
           </div>
         </div>
 
@@ -142,8 +243,8 @@
               <circle cx="9" cy="7" r="4"></circle>
 
             </svg>
-            <h2 class="title-font font-medium text-3xl text-white"> ₹ 240</h2>
-            <p class="leading-relaxed">My usage</p>
+            <h2 class="title-font font-medium text-2xl text-white" id="myspending"></h2>
+            <p class="leading-relaxed">My Spending</p>
           </div>
         </div>
 
@@ -152,82 +253,8 @@
             <img src="assets/shopping-bag.png" class="text-green-400 w-12 h-12 mb-3 inline-block">
 
             </img>
-            <h2 class="title-font font-medium text-3xl text-white">38</h2>
+            <h2 class="title-font font-medium text-2xl text-white" id="totalentries"></h2>
             <p class="leading-relaxed">Total Purches</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-   <!-- Contact Us -->
-   <section class="text-gray-400 bg-gray-900 body-font relative" id="contactUs">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="flex flex-col text-center w-full mb-12">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Contact Us</h1>
-      </div>
-      <div class="lg:w-1/2 md:w-2/3 mx-auto">
-        <div class="flex flex-wrap -m-2">
-          <div class="p-2 w-1/2">
-            <div class="relative">
-              <label for="name" class="leading-7 text-sm text-gray-400">Name</label>
-              <input type="text" id="name" name="name"
-                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-            </div>
-          </div>
-          <div class="p-2 w-1/2">
-            <div class="relative">
-              <label for="email" class="leading-7 text-sm text-gray-400">Email</label>
-              <input type="email" id="email" name="email"
-                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-            </div>
-          </div>
-          <div class="p-2 w-full">
-            <div class="relative">
-              <label for="message" class="leading-7 text-sm text-gray-400">Message</label>
-              <textarea id="message" name="message"
-                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
-            </div>
-          </div>
-          <div class="p-2 w-full">
-            <button
-              class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Button</button>
-          </div>
-          <div class="p-2 w-full pt-8 mt-8 border-t border-gray-800 text-center">
-            <a class="text-green-400">example@email.com</a>
-            <p class="leading-normal my-5">Pune, Maharashtra, India</p>
-            </p>
-            <span class="inline-flex">
-              <a class="text-gray-500">
-                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                  viewBox="0 0 24 24">
-                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                </svg>
-              </a>
-              <a class="ml-4 text-gray-500">
-                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                  viewBox="0 0 24 24">
-                  <path
-                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                  </path>
-                </svg>
-              </a>
-              <a class="ml-4 text-gray-500">
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  class="w-5 h-5" viewBox="0 0 24 24">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                </svg>
-              </a>
-              <a class="ml-4 text-gray-500">
-                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                  viewBox="0 0 24 24">
-                  <path
-                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                  </path>
-                </svg>
-              </a>
-            </span>
           </div>
         </div>
       </div>
@@ -341,11 +368,11 @@
         <div class="flex justify-end pt-2">
           <button
             class="focus:outline-none modal-close px-4 bg-teal-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400">Cancel</button>
-          <button
-            class="focus:outline-none px-4 bg-red-400 p-3 rounded-lg text-black hover:bg-red-300">Delete</button>
+          <button class="focus:outline-none px-4 bg-red-400 p-3 rounded-lg text-black hover:bg-red-300"
+            onclick="deleteentry()">Delete</button>
 
-          <button
-            class="focus:outline-none mx-4 px-4 bg-gray-700 p-3 rounded-lg text-green-500 hover:bg-gray-600" onclick="editEntryDB()">Confirm</button>
+          <button class="focus:outline-none mx-4 px-4 bg-gray-700 p-3 rounded-lg text-green-500 hover:bg-gray-600"
+            onclick="editEntryDB()">Confirm</button>
         </div>
       </div>
     </div>
@@ -417,6 +444,21 @@
   </script>
   <script src="index.js"></script>
   <script src="auth.js"></script>
+  <script>
+    function hideLoader() {
+      const e = document.getElementById("loader");
+      console.log(e)
+      e.style.animation = "fadeinout 0.5s linear forwards"
+    }
+  </script>
+  <script>
+    function playLoader() {
+
+      const e = document.getElementById("loader");
+      console.log(e)
+      e.style.animation = "fadeoutin 0.5s linear forwards"
+    }
+  </script>
 </body>
 
 </html>

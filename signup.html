@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,94 +9,106 @@
     <link rel="icon" type="image/x-icon" href="assets/bank.png">
     <title>Signup</title>
 </head>
+
 <body>
     <!-- component -->
-<!-- This is an example component -->
- <div class="font-sans">
-    <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-900 ">
-        <div class="relative sm:max-w-sm rounded-lg border-2 border-green-500 w-full">
-            <div class="card bg-green-500 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
-            <div class="card bg-green-500 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
-            <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-900 shadow-md">
-                <label for="" class="block mt-3 text-sm text-gray-100 text-center font-semibold">
-                    Sign Up
-                </label>
+    <!-- This is an example component -->
+    <div class="font-sans">
+        <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-900 ">
+            <div class="relative sm:max-w-sm rounded-lg border-2 border-green-500 w-full">
+                <div class="card bg-green-500 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
+                <div class="card bg-green-500 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
+                <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-900 shadow-md">
+                    <label for="" class="block mt-3 text-sm text-gray-100 text-center font-semibold">
+                        Sign Up
+                    </label>
                     <div class="mt-7">
-                        <input id="name" type="text" placeholder="Name" class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        <input id="name" type="text" placeholder="Name"
+                            class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
-                    <div class="mt-7" >
-                        <input id="email" type="email" placeholder="Email" class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                    </div>
-        
-                    <div class="mt-7">                
-                        <input id="password" type="password" placeholder="Password" class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">                           
+                    <div class="mt-7">
+                        <input id="email" type="email" placeholder="Email"
+                            class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
 
-                    <div class="mt-7">                
-                        <input id="password2" type="password" placeholder="Confirm Password" class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">                           
+                    <div class="mt-7">
+                        <input id="password" type="password" placeholder="Password"
+                            class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
-        
-                    <div class="flex items-center justify-center w-full h-full mt-3" id="loading" style="display: none;">
+
+                    <div class="mt-7">
+                        <input id="password2" type="password" placeholder="Confirm Password"
+                            class="w-full bg-gray-800 bg-opacity-40  rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+
+                    <div class="flex items-center justify-center w-full h-full mt-3" id="loading"
+                        style="display: none;">
                         <div class="flex justify-center items-center space-x-1 text-sm text-gray-700">
-                             
-                                    <svg fill='none' class="w-6 h-6 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
-                                        <path clip-rule='evenodd'
-                                            d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
-                                            fill='currentColor' fill-rule='evenodd' />
-                                    </svg>
-                    
-                             
+
+                            <svg fill='none' class="w-6 h-6 animate-spin" viewBox="0 0 32 32"
+                                xmlns='http://www.w3.org/2000/svg'>
+                                <path clip-rule='evenodd'
+                                    d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
+                                    fill='currentColor' fill-rule='evenodd' />
+                            </svg>
+
+
                             <div>Signing you in....</div>
                         </div>
                     </div>
 
                     <div class="mt-7">
-                        <button class="bg-green-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105" onclick="signup()">
+                        <button
+                            class="bg-green-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105"
+                            onclick="signup()">
                             Sign Up
                         </button>
                     </div>
-        
-        
+
+
                     <div class="flex mt-7 justify-center w-full">
-        
-                        <button class="bg-green-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105" onclick="window.location.href='login.html'">       
+
+                        <button
+                            class="bg-green-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105"
+                            onclick="window.location.href='login.html'">
                             Login
                         </button>
                     </div>
-                    
+
+                </div>
             </div>
         </div>
+
     </div>
-    
-</div>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyCxK_OOYevWXk_u6eqlHK217pK7wDTew7c",
-      authDomain: "ngcommonfund.firebaseapp.com",
-      projectId: "ngcommonfund",
-      storageBucket: "ngcommonfund.appspot.com",
-      messagingSenderId: "503727783408",
-      appId: "1:503727783408:web:0b85b054c83bb21bf6b135",
-      //measurementId: "G-Y81L3B3F5X"
-    };
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxK_OOYevWXk_u6eqlHK217pK7wDTew7c",
+            authDomain: "ngcommonfund.firebaseapp.com",
+            projectId: "ngcommonfund",
+            storageBucket: "ngcommonfund.appspot.com",
+            messagingSenderId: "503727783408",
+            appId: "1:503727783408:web:0b85b054c83bb21bf6b135",
+            //measurementId: "G-Y81L3B3F5X"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
-<script src="auth.js"></script>
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    <script src="auth.js"></script>
 </body>
+
 </html>
