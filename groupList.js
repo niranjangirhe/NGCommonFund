@@ -57,7 +57,7 @@ function addcard(name, i) {
 function openIndex(i) {
     console.log(nameList[i]);
     localStorage.setItem("grouplink", nameList[i]);
-    window.location.href = "index.html";
+    window.location.href = "groupview.html";
 }
 
 function enableGroupForm() {
