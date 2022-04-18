@@ -186,7 +186,7 @@ function addbtnpressed() {
       if (entry[i].value.trim() != "")
         list.push(entry[i].value.trim());
     }
-    addentry(firebase.auth().currentUser.email, list, amount, discription)
+    addentry(firebase.auth().currentUser.displayName, list, amount, discription)
     clearinputfeilds()
   }
 }
