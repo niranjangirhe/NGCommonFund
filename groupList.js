@@ -108,9 +108,7 @@ async function addentry(name, list) {
     loading = document.getElementById("loading")
     loading.style.display = "block"
     await db.collection("group").add({
-        name: name,
-        list: list,
-        report: Array(list.length).fill(0)
+        name: name
     })
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
@@ -144,15 +142,31 @@ async function updateUser(list, groupid) {
 
                 } else {
                     console.log("No such document!");
+                    alert(list[i]+": User not found")
+                    list.splice(i,1);
+                    i--;
                 }
             }).catch((error) => {
                 loading.style.display = "none"
                 console.log("Error getting document:", error);
             });
     }
+    updateGroupAgain(list, groupid);
     window.location.reload();
 }
-
+async function updateGroupAgain(list,groupid) {
+        await db.collection("group").doc(groupid).update({
+            list: list,
+            report: Array(list.length).fill(0)
+        })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+                console.error("Error updating document: ", error);
+                loading.style.display = "none"
+            });
+}
 window.addEventListener('DOMContentLoaded', (event) => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {

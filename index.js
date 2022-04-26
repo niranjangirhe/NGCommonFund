@@ -603,3 +603,8 @@ function deleteentry() {
   });
 
 }
+
+function EditGroup()
+{
+  
+}
