@@ -204,8 +204,8 @@ function updateStats() {
 function updateReport() {
   var rep = document.getElementById("report");
   var rep2 = document.getElementById("report2");
-  rep.innerHTML ="";
-  rep2.innerHTML ="";
+  rep.innerHTML = "";
+  rep2.innerHTML = "";
   for (var i = 0; i < report.length; i++) {
     var color = "text-green-400";
     if (report[i] < 0) {
@@ -228,10 +228,10 @@ function updateReport() {
 
 function sortFunction(a, b) {
   if (a[0] === b[0]) {
-      return 0;
+    return 0;
   }
   else {
-      return (a[0] < b[0]) ? -1 : 1;
+    return (a[0] < b[0]) ? -1 : 1;
   }
 }
 
@@ -239,13 +239,13 @@ function sortFunction(a, b) {
 function updatereportmax() {
   //console.log("===============================")
   for (var i = 0; i < templist.length; i++) {
-   console.log(templist[i][0], templist[i][1]);
+    console.log(templist[i][0], templist[i][1]);
   }
   //console.log("-------------------------------")
   templist.sort(sortFunction);
   for (var i = 0; i < templist.length; i++) {
     console.log(templist[i][0], templist[i][1]);
-   }
+  }
   var rep = document.getElementById("report2");
   var amount = 0;
   if (-templist[0][0] > templist[templist.length - 1][0]) {
@@ -604,7 +604,72 @@ function deleteentry() {
 
 }
 
-function EditGroup()
-{
-  
+async function AddMember() {
+  var extraMail = window.prompt("Enter the email of the person you want to add");
+  if (extraMail != null) {
+    playLoader();
+    await db.collection("user").doc(extraMail)
+      .get().then((doc) => {
+        if (doc.exists) {
+          var group = doc.data().group;
+          group.push(localStorage.getItem("grouplink"));
+          console.log(doc.id);
+          db.collection("user").doc(doc.id).update({
+            group: group
+          })
+            .then(() => {
+              console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+              hideLoader();
+              return;
+            });
+
+        } else {
+          console.log("No such document!");
+          alert(extraMail + ": User not found")
+          hideLoader();
+          return;
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+        hideLoader();
+        return;
+      });
+
+    await db.collection("group").doc(localStorage.getItem("grouplink"))
+      .get().then((doc) => {
+        if (doc.exists) {
+          var list = doc.data().list;
+          var report = doc.data().report;
+          report.push(0);
+          list.push(extraMail);
+          db.collection("group").doc(localStorage.getItem("grouplink")).update({
+            list: list,
+            report: report
+          })
+            .then(() => {
+              console.log("Document successfully updated!");
+              window.location.reload();
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+              hideLoader();
+              return;
+            });
+
+        } else {
+          console.log("No such document!");
+          hideLoader();
+          return;
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+        hideLoader();
+        return;
+      });
+
+
+  }
 }
