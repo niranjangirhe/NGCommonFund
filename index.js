@@ -619,6 +619,37 @@ async function AddMember() {
           })
             .then(() => {
               console.log("Document successfully updated!");
+              db.collection("group").doc(localStorage.getItem("grouplink"))
+                .get().then((doc) => {
+                  if (doc.exists) {
+                    var list = doc.data().list;
+                    var report = doc.data().report;
+                    report.push(0);
+                    list.push(extraMail);
+                    db.collection("group").doc(localStorage.getItem("grouplink")).update({
+                      list: list,
+                      report: report
+                    })
+                      .then(() => {
+                        console.log("Document successfully updated!");
+                        window.location.reload();
+                      })
+                      .catch((error) => {
+                        console.error("Error updating document: ", error);
+                        hideLoader();
+                        return;
+                      });
+
+                  } else {
+                    console.log("No such document!");
+                    hideLoader();
+                    return;
+                  }
+                }).catch((error) => {
+                  console.log("Error getting document:", error);
+                  hideLoader();
+                  return;
+                });
             })
             .catch((error) => {
               console.error("Error updating document: ", error);
@@ -637,39 +668,5 @@ async function AddMember() {
         hideLoader();
         return;
       });
-
-    await db.collection("group").doc(localStorage.getItem("grouplink"))
-      .get().then((doc) => {
-        if (doc.exists) {
-          var list = doc.data().list;
-          var report = doc.data().report;
-          report.push(0);
-          list.push(extraMail);
-          db.collection("group").doc(localStorage.getItem("grouplink")).update({
-            list: list,
-            report: report
-          })
-            .then(() => {
-              console.log("Document successfully updated!");
-              window.location.reload();
-            })
-            .catch((error) => {
-              console.error("Error updating document: ", error);
-              hideLoader();
-              return;
-            });
-
-        } else {
-          console.log("No such document!");
-          hideLoader();
-          return;
-        }
-      }).catch((error) => {
-        console.log("Error getting document:", error);
-        hideLoader();
-        return;
-      });
-
-
   }
 }
