@@ -319,17 +319,29 @@ function addinputfieldmodal() {
 function addbtnpressed() {
   playLoader();
   var amount = document.getElementById("amount").value
+
   var discription = document.getElementById("discription").value
   var entry = document.getElementsByClassName("entry");
   if (amount == "" || entry[0].value.trim() == "") {
     alert("Please Enter complete Info")
     hideLoader();
+    return
+  }
+  else if (amount <= 0) {
+    alert("Amount should be greater than 0")
+    hideLoader();
+    return
   }
   else {
     var list = [];
     for (var i = 0; i < entry.length; i++) {
       if (entry[i].value.trim() != "")
         list.push(entry[i].value.trim());
+    }
+    if (list.length) {
+      alert("Atleast one user should be checked")
+      hideLoader();
+      return
     }
     addentry(firebase.auth().currentUser.displayName, list, amount, discription)
     clearinputfeilds()
@@ -475,6 +487,11 @@ function updateentry(name, list, price, description) {
     userlist.push(userdoc[i].checked)
     if (userdoc[i].checked)
       countuser++;
+  }
+  if (countuser == 0) {
+    alert("Atleast one user should be checked")
+    hideLoader();
+    return
   }
 
   for (var i = 0; i < psuedostack[oldindex][7].length; i++) {
