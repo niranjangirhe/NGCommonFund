@@ -191,6 +191,7 @@ function readentry() {
     });
 }
 
+//display Stats
 function updateStats() {
   console.log(totalentries, totalprice, myspending, report[index]);
   document.getElementById("totalentries").innerHTML = totalentries;
@@ -200,7 +201,7 @@ function updateStats() {
   updateReport()
 }
 
-
+//display basic report
 function updateReport() {
   var rep = document.getElementById("report");
   var rep2 = document.getElementById("report2");
@@ -236,6 +237,7 @@ function sortFunction(a, b) {
 }
 
 
+//display update max report
 function updatereportmax() {
   //console.log("===============================")
   for (var i = 0; i < templist.length; i++) {
@@ -457,6 +459,8 @@ async function checklistfiller() {
   document.getElementById("greet").innerHTML = `Welcome ` + firebase.auth().currentUser.displayName + `!`;
   readentry()
 }
+
+//edit entry in Database
 function editEntryDB() {
   var amount = document.getElementById("amountmodal").value
   var discription = document.getElementById("discriptionmodal").value
