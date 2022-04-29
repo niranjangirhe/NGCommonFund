@@ -340,7 +340,7 @@ function addbtnpressed() {
       if (entry[i].value.trim() != "")
         list.push(entry[i].value.trim());
     }
-    if (list.length) {
+    if (list.length == 0) {
       alert("Atleast one user should be checked")
       hideLoader();
       return
