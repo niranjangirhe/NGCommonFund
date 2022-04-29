@@ -115,7 +115,12 @@ function addentry(name, list, price, description) {
     if (userdoc[i].checked)
       countuser++;
   }
-
+  
+    if (countuser == 0) {
+      alert("Atleast one user should be checked")
+      hideLoader();
+      return
+    }
   for (var i = 0; i < report.length; i++) {
 
     if (i == index) {
@@ -339,11 +344,6 @@ function addbtnpressed() {
     for (var i = 0; i < entry.length; i++) {
       if (entry[i].value.trim() != "")
         list.push(entry[i].value.trim());
-    }
-    if (list.length == 0) {
-      alert("Atleast one user should be checked")
-      hideLoader();
-      return
     }
     addentry(firebase.auth().currentUser.displayName, list, amount, discription)
     clearinputfeilds()
