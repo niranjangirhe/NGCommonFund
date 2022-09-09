@@ -89,7 +89,7 @@ function addcardcardwrapper(name, list, price, description, date, docid, index, 
   </svg>
 </button>`
   datesrtring = datenum + " " + months[month] + " " + year + " " + hr + ":" + min;
-  t.innerHTML = `<div class="p-4 xl:w-1/4 md:w-1/2 w-full">
+  t.innerHTML = `<div class="p-4 xl:w-1/6 md:w-1/3 w-full">
     <div class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
              <span class="bg-green-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">`+ datesrtring + `</span>
       <h2 class="text-sm tracking-widest text-gray-400 title-font mb-1 font-medium">`+ name + `</h2>
