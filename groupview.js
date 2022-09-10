@@ -11,6 +11,7 @@ var oldPrice;
 var oldUser = [];
 var oldindex;
 var totalentries = 0;
+var myentries = 0;
 var totalprice = 0;
 var myspending = 0;
 var templist = [];
@@ -94,11 +95,12 @@ function addcardcardwrapper(name, list, price, description, date, docid, index, 
              <span class="bg-green-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">`+ datesrtring + `</span>
       <h2 class="text-sm tracking-widest text-gray-400 title-font mb-1 font-medium">`+ name + `</h2>
       <h1 class="text-5xl text-white pb-4 mb-4 border-b border-gray-800 leading-none">`+ "₹ " + price + `</h1>` +
-    liststring
-    + buttoncode + `
-      <p class="text-xl text-gray-400 mt-3 border-t pt-3 border-gray-800">`+ description + `</p>
+    liststring + `
+      <p class="text-xl text-gray-400 mb-3 border-b border-t p-2 border-gray-800">`+ description + `</p>`
+      + buttoncode +
+      `
     </div>
-  </div>`+ t.innerHTML;
+  </div>`+ t.innerHTML ;
 }
 
 //firebase
@@ -173,10 +175,16 @@ function addentry(name, list, price, description) {
 }
 function readentry() {
   db.collection("group").doc(localStorage.getItem("grouplink")).collection("transaction").orderBy("date", "desc")
+    //.limit(50)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         totalentries++;
+        if(doc.data().name.includes(firebase.auth().currentUser.displayName))
+        {
+          myentries++;
+        }
+
         totalprice += parseFloat(doc.data().price);
         if (doc.data().name == firebase.auth().currentUser.displayName)
           myspending += parseFloat(doc.data().price);
@@ -200,6 +208,7 @@ function readentry() {
 function updateStats() {
   console.log(totalentries, totalprice, myspending, report[index]);
   document.getElementById("totalentries").innerHTML = totalentries;
+  document.getElementById("myentries").innerHTML = myentries;
   document.getElementById("totalprice").innerHTML = "₹ " + totalprice.toFixed(2);
   document.getElementById("myspending").innerHTML = "₹ " + myspending.toFixed(2);
   document.getElementById("totalbalance").innerHTML = "₹ " + report[index].toFixed(2);

@@ -106,7 +106,7 @@
         <h2 class="sm:text-2xl text-3xl font-medium title-font mb-2 text-gray-400">Split-It When You Need It!</h2>
       </div>
       <div class="flex flex-wrap -m-4" id="cardwrapper" id="entries">
-        <div class="p-4 xl:w-1/5 md:w-1/2 w-full">
+        <div class="p-4 xl:w-1/5 md:w-1/3 w-full">
           <div id="fillform"
             class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
             <span class="bg-green-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"
@@ -140,7 +140,12 @@
             <div class="flex flex-col" id="label">
 
             </div>
-            <br>
+            <p class="flex items-center text-gray-400 mb-3 mt-3">
+              <!-- Actual Entries -->
+              <input
+                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                placeholder="Description" type="text" name="" id="discription">
+            </p>
             <button
               class="flex items-center mt-auto text-white bg-green-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-green-600 rounded"
               onclick="addbtnpressed()">Add
@@ -150,13 +155,8 @@
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>
             </button>
-            <br>
-            <p class="flex items-center text-gray-400 mb-2">
-              <!-- Actual Entries -->
-              <input
-                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                placeholder="Description" type="text" name="" id="discription">
-            </p>
+           
+            
           </div>
         </div>
       </div>
@@ -174,7 +174,7 @@
         <h2 class="sm:text-2xl text-3xl font-medium title-font mb-2 text-white">Report</h2>
       </div>
       <div class="flex flex-wrap -m-4" id="cardwrapper" id="entries">
-        <div class="p-4 xl:w-1/2 md:w-1/2 w-full">
+        <div class="p-4 xl:w-1/3 md:w-1/3 w-full">
           <div id="fillform"
             class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
 
@@ -190,7 +190,7 @@
 
           </div>
         </div>
-        <div class="p-4 xl:w-1/2 md:w-1/2 w-full">
+        <div class="p-4 xl:w-2/3 md:w-2/3 w-full">
           <div id="fillform"
             class="h-full p-6 rounded-lg border-2 border-green-500 flex flex-col relative overflow-hidden">
 
@@ -211,7 +211,7 @@
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Statistics</h1>
       </div>
       <div class="flex flex-wrap -m-4 text-center">
-        <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="p-4 md:w-1/5 sm:w-1/3 w-full">
           <div class="border-2 border-gray-800 px-4 py-6 rounded-lg">
             <img src="assets/salary.png" class="text-green-400 w-12 h-12 mb-3 inline-block">
 
@@ -223,7 +223,7 @@
             <p class="leading-relaxed">Total Balance</p>
           </div>
         </div>
-        <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="p-4 md:w-1/5 sm:w-1/3 w-full">
           <div class="border-2 border-gray-800 px-4 py-6 rounded-lg">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               class="text-green-400 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
@@ -236,7 +236,7 @@
           </div>
         </div>
 
-        <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="p-4 md:w-1/5 sm:w-1/3 w-full">
           <div class="border-2 border-gray-800 px-4 py-6 rounded-lg">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               class="text-green-400 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
@@ -249,13 +249,23 @@
           </div>
         </div>
 
-        <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        <div class="p-4 md:w-1/5 sm:w-1/3 w-full">
+          <div class="border-2 border-gray-800 px-4 py-6 rounded-lg">
+            <img src="assets/shopping-bag.png" class="text-green-400 w-12 h-12 mb-3 inline-block">
+
+            </img>
+            <h2 class="title-font font-medium text-2xl text-white" id="myentries"></h2>
+            <p class="leading-relaxed">My purchases</p>
+          </div>
+        </div>
+
+        <div class="p-4 md:w-1/5 sm:w-1/3 w-full">
           <div class="border-2 border-gray-800 px-4 py-6 rounded-lg">
             <img src="assets/shopping-bag.png" class="text-green-400 w-12 h-12 mb-3 inline-block">
 
             </img>
             <h2 class="title-font font-medium text-2xl text-white" id="totalentries"></h2>
-            <p class="leading-relaxed">Total Purches</p>
+            <p class="leading-relaxed">Total purchases</p>
           </div>
         </div>
       </div>
